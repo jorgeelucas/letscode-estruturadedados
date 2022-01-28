@@ -4,7 +4,7 @@
 package br.com.letscode;
 
 import br.com.letscode.dominio.Pessoa;
-import br.com.letscode.listas.listaligada.listaligada.ListaLigada;
+import br.com.letscode.ed.listas.listaligada.listaligada.ListaLigada;
 
 public class App {
     public static void main(String[] args) {
@@ -18,6 +18,12 @@ public class App {
         lista.listarTodos();
 
         lista.adicionarNoComeco(new Pessoa("Carlos"));
+        lista.listarTodos();
+
+        lista.adicionar(new Pessoa("Jessica"), 2);
+        lista.listarTodos();
+
+        lista.remover(2);
         lista.listarTodos();
 
     }

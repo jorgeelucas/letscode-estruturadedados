@@ -1,13 +1,11 @@
-package br.com.letscode.ed;
+package br.com.letscode.ed.listas;
 
 import br.com.letscode.dominio.Pessoa;
 
-public interface EstruturaDados {
-    // LIST
+public interface EstruturaDadosConjunto {
+    // SET
     void adicionar(Pessoa pessoa);
     Pessoa buscar(String nome);
     void remover(Pessoa pessoa);
-    void remover(int index);
     void listarTodos();
-    Pessoa getPessoa(int index);
 }

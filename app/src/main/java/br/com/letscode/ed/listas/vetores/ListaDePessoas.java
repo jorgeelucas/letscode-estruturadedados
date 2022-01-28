@@ -1,4 +1,4 @@
-package br.com.letscode.listas.vetores;
+package br.com.letscode.ed.listas.vetores;
 
 import java.util.Objects;
 

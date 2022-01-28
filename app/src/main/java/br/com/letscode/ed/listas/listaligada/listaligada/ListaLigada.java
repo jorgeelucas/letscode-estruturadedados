@@ -1,4 +1,4 @@
-package br.com.letscode.listas.listaligada.listaligada;
+package br.com.letscode.ed.listas.listaligada.listaligada;
 
 import br.com.letscode.dominio.Pessoa;
 import br.com.letscode.ed.EstruturaDados;
@@ -24,7 +24,25 @@ public class ListaLigada implements EstruturaDados {
         }
     }
 
-    public void adicionar(Pessoa pessoa, int index) {
+    public void adicionar(Pessoa pessoa, int posicao) {
+        if (!posicaoValida(posicao)) {
+            throw new RuntimeException("posicao invalida");
+        }
+
+        if (posicao == 0) {
+            adicionarNoComeco(pessoa);
+        } else if (posicao == this.totalDeElementos) {
+            adicionar(pessoa);
+        } else {
+            Celula nova = new Celula();
+            nova.setElemento(pessoa);
+
+            Celula anterior = getCelula(posicao-1);
+            nova.setProximo(anterior.getProximo());
+            anterior.setProximo(nova);
+
+            this.totalDeElementos++;
+        }
     }
 
     public void adicionarNoComeco(Pessoa pessoa) {
@@ -40,12 +58,22 @@ public class ListaLigada implements EstruturaDados {
         this.totalDeElementos++;
     }
 
-    private Celula getCelula(int posicao) {
-        return null;
+    public Celula getCelula(int posicao) {
+        if (!posicaoValida(posicao)) {
+            throw new RuntimeException("Posicao invalida");
+        }
+
+        Celula atual = this.primeiro;
+
+        for (int i = 0 ; i < posicao ; i++) {
+            atual = atual.getProximo();
+        }
+
+        return atual;
     }
 
     private boolean posicaoValida(int posicao) {
-        return false;
+        return posicao >= 0 && posicao < totalDeElementos;
     }
 
     @Override
@@ -58,8 +86,24 @@ public class ListaLigada implements EstruturaDados {
     }
 
     @Override
-    public void remover(int index) {
+    public void remover(int posicao) {
+        if (!posicaoValida(posicao)) {
+            throw new RuntimeException("posicao invalida");
+        }
 
+        if (posicao == 0) {
+
+            Celula segundo = this.primeiro.getProximo();
+            this.primeiro = segundo;
+
+        } else if (posicao == this.totalDeElementos) {
+            Celula penultimo = getCelula(posicao - 1);
+            this.ultimo = penultimo;
+        } else {
+            Celula anterior = getCelula(posicao - 1);
+            anterior.setProximo(anterior.getProximo().getProximo());
+        }
+        this.totalDeElementos--;
     }
 
     @Override
