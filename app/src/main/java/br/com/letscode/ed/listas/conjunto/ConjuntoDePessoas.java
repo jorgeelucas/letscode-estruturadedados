@@ -1,5 +1,6 @@
 package br.com.letscode.ed.listas.conjunto;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import br.com.letscode.dominio.Pessoa;
@@ -7,7 +8,7 @@ import br.com.letscode.ed.listas.EstruturaDadosConjunto;
 
 public class ConjuntoDePessoas implements EstruturaDadosConjunto {
 
-    private LinkedList<LinkedList<Pessoa>> espalhamento = new LinkedList<>();
+    private ArrayList<LinkedList<Pessoa>> espalhamento = new ArrayList<>();
 
     public ConjuntoDePessoas() {
         for (int i = 0 ; i < 26 ; i++) {
@@ -40,6 +41,9 @@ public class ConjuntoDePessoas implements EstruturaDadosConjunto {
 
     @Override
     public void remover(Pessoa pessoa) {
+        int indice = encontraIndice(pessoa.getNome());
+        LinkedList<Pessoa> lista = this.espalhamento.get(indice);
+        lista.remove(pessoa);
     }
 
     @Override
